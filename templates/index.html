@@ -7,10 +7,13 @@
 </head>
 <body>
     <h1>Boggle</h1>
+    <h4 id='timer'>
+        <!-- show timer here -->
+    </h4>
     <form id="guess-form">
         <label for="guess">Enter your guess:</label>
         <input type="text" name="guess" id="guess" placeholder="Enter Guess">
-        <button>Submit Guess</button>
+        <button id="submit">Submit Guess</button>
     </form>
     <table>
         {% for row in board %}
