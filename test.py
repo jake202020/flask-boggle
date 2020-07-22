@@ -5,6 +5,7 @@ from boggle import Boggle
 
 
 class FlaskTests(TestCase):
+    """Test app.py routes"""
 
-    # TODO -- write tests for every view function / feature!
-
+    def test_boggle_start(self):
+        self.assertIn(<td>,index.html)

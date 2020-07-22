@@ -6,6 +6,12 @@
     <title>Boggle Game</title>
 </head>
 <body>
+    <h1>Boggle</h1>
+    <form id="guess-form">
+        <label for="guess">Enter your guess:</label>
+        <input type="text" name="guess" id="guess" placeholder="Enter Guess">
+        <button>Submit Guess</button>
+    </form>
     <table>
         {% for row in board %}
             <tr>
@@ -15,12 +21,9 @@
             </tr>
             {% endfor %}
     </table>
-
-    <form id="guess-form">
-        <label for="guess">Enter your guess:</label>
-        <input type="text" name="guess" id="guess" placeholder="Enter Guess">
-        <button>Submit Guess</button>
-    </form>
+    <h3 id="message">
+        <!-- js message goes here -->
+    </h3>
     <p>{{ result }}</p>
     <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
