@@ -1,3 +1,5 @@
+let score = 0
+
 $('#guess-form').on('submit', async function (evt) {
     evt.preventDefault();
     const $word = $("#guess")
@@ -17,7 +19,14 @@ $('#guess-form').on('submit', async function (evt) {
 
     else {
         $("#message").text(`${word} is okay`)
+
+        $("#score").text(gameScore(word))
     }
 
     $word.val("")
 })
+
+function gameScore(word) {
+    score += word.length
+    return score
+}
