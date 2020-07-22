@@ -1,16 +1,6 @@
 let score = 0;
 let words = new Set();
-let time = 60;
-
-let timer = setInterval(function () {
-    $("#timer").text(`${time} seconds`)
-    time -= 1;
-    if (time === -1) {
-        clearInterval(timer)
-        $('#guess').attr("disabled", "disabled")
-    }
-
-}, 1000)
+let time = 10;
 
 $('#guess-form').on('submit', async function (evt) {
     evt.preventDefault();
@@ -38,16 +28,33 @@ $('#guess-form').on('submit', async function (evt) {
 
     else {
         words.add(word)
-
+        score += word.length
         $("#message").text(`${word} is okay`)
-
-        $("#score").text(gameScore(word))
+        $("#score").text(score)
     }
 
     $word.val("")
 })
 
-function gameScore(word) {
-    score += word.length
-    return score
+let timer = setInterval(async function () {
+    time -= 1;
+    $("#timer").text(`${time} seconds`)
+
+    if (time === 0) {
+        $('#guess').attr("disabled", "disabled")
+        $('#submit').attr("disabled", "disabled")
+        clearInterval(timer)
+        await gameScore();
+    }
+
+}, 1000)
+
+async function gameScore() {
+    $("#score").text("")
+    const resp = await axios.post("/post-score", { score: score })
+    if (resp.data.brokeRecord) {
+        $("#message").text(`New record: ${score}`);
+    } else {
+        $("#message").text(`Final score: ${score}`);
+    }
 }

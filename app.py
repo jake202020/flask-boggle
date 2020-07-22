@@ -25,8 +25,18 @@ def check_word():
 
     return jsonify({"result": result})
 
+@app.route('/post-score', methods=["POST"])
+def post_score():
+    """Receive score, update num_plays, update high score if needed"""
 
+    score = request.json["score"]
+    highscore = session.get("highscore", 0)
+    num_plays = session.get("num_plays", 0)
 
+    session['num_plays'] = num_plays + 1
+    session['highscore'] = max(score, highscore)
+
+    return jsonify(brokeRecord=score > highscore)
 
 # # get random string password with letters, digits, and symbols
 
